@@ -110,7 +110,7 @@ def build_phoc(words, phoc_unigrams, unigram_levels,
                         region_occ = occupancy(region, level)
                         overlap_size = size(overlap(occ, region_occ)) / size(occ)
                         if overlap_size >= 0.5:
-                            ngram_features[region * len(phoc_bigrams) + phoc_bigrams[ngram]] = 1
+                            ngram_features[sum([l for l in bigram_levels if l < level]) * len(phoc_bigrams) + region * len(phoc_bigrams) + phoc_bigrams[ngram]] = 1
             phocs[word_index, -ngram_features.shape[0]:] = ngram_features        
     return phocs
 
